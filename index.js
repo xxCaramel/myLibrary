@@ -1,14 +1,27 @@
 
 
-let myLibrary = []
+let myLibrary = [];
+let id_counter = getCounter();
+const library_dom = document.querySelector(".library");
 displayBooks();
 
+/*Event listener*/
+library_dom.addEventListener('click', (event) => {
+    if(event.target.name === "delete") {
+        removeBookEvent(+event.target.closest(".book").getAttribute("name"));
+    } else if (event.target.name === "readStat") {
+        console.log("ReadStat")
+    }
+});
+
+
 /*Book constructor*/
-function Book(author,name,pages,hasRead) {
+function Book(author,name,pages,hasRead,id) {
     this.name = name;
     this.author = author;
     this.pages = pages;
     this.hasRead = hasRead;
+    this.id = id;
 }
 
 /*Adds any number of books to myLibrary array*/
@@ -29,6 +42,14 @@ function deleteBook(book){
     } else {
         console.log("No book found");
     }
+    localStorage.setItem("lib",JSON.stringify(myLibrary));
+    
+}
+
+function removeBookEvent(id) {
+    let book = myLibrary.find(item => item.id==id);
+    deleteBook(book);
+    location.reload();
 }
 
 /*Create and add book*/
@@ -47,10 +68,17 @@ function createBookEvent() {
     }
     info.push(readStatus);
    
+    let book = new Book(info[0],info[1],info[2],info[3],id_counter++);
+    localStorage.setItem("counter",id_counter);
 
-    let book = new Book(info[0],info[1],info[2],info[3]);
     addBookToLibrary(book);
 
+}
+
+function getCounter() {
+    let counter = localStorage.getItem("counter");
+    if(!counter) return 0;
+    return +counter;
 }
 
 function toggle() {
@@ -67,22 +95,22 @@ function toggle() {
 
 function displayBooks() {
    
-    let library_dom = document.querySelector(".library");
+    
     let library = JSON.parse(localStorage.getItem("lib"));
     let html;
     
    if(!library) return;
    myLibrary = library; //myLibrary now is a reference to library
    for(let book of library){
-        html = createHTML(book.author,book.name,book.pages,book.hasRead);
+        html = createHTML(book.author,book.name,book.pages,book.hasRead,book.id);
         library_dom.insertAdjacentHTML('afterbegin',html);
    }
 
 }
 
-function createHTML(author,name,pages,hasRead) {
+function createHTML(author,name,pages,hasRead,id) {
     html = 
-    `<div class="book">
+    `<div class="book" name=${String(id)}>
         <div class="book_right">
             <p>${name}</p>
             <p>${author}</p>
@@ -90,7 +118,7 @@ function createHTML(author,name,pages,hasRead) {
         </div>
             <div class="book_left">
                 <div class="book_btns">
-                    <button class="btn_b btn" name="readStat">-</button>
+                    <button class="btn_b btn" name="readStat">${String(hasRead)}</button>
                     <button class="btn_b btn" name="delete">Delete</button>
                 </div>
         </div>
