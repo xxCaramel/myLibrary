@@ -1,0 +1,135 @@
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+body {
+    padding: 15px;
+}
+
+:root {
+    --border-color: #cdc7c2;
+}
+
+
+html {
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+.main_nav {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+input {
+    margin:2px;
+}
+
+input[type=text]{
+    border: 1px solid var(--border-color);
+    padding: 0.4rem;
+    margin:5px;
+    border-radius: 3px;
+}
+
+#read {
+    font-size: 1rem;
+    text-align: start;
+}
+
+.main_form {
+    display:none;
+    flex-direction: column;
+    width: 50%;
+    max-width: 600px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    
+}
+
+
+
+.book_entry {
+    display: flex;
+    flex-direction: column;
+    border-bottom:none;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+}
+
+
+.btn {
+    
+    width: 80px;
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    background-color: white;
+   
+}
+
+#submit {
+    display: block;
+    margin-left: auto;
+}
+
+#new_btn {
+    margin-top: 15px;
+}
+.btn:hover {
+    background-color: whitesmoke;
+}
+
+@media only screen and (max-width:600px) {
+    .main_form {
+        width: 100%;
+    }
+    p {
+        font-size: 1rem;
+    }
+
+
+}
+
+/* Library container */
+
+.library {
+    display: grid;
+    gap:5px;
+    grid-template-columns: repeat(auto-fill,minmax(min(400px,100%),1fr));
+}
+
+.book {
+    display: flex;
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    font-size: 1.5rem;
+    height: 120px;
+    overflow: hidden;
+}
+
+.book_left{
+    margin-left: auto;
+}
+
+.btn_b {
+    display: block;
+    width: 70px;
+    margin-top: 5px;
+}

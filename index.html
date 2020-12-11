@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>MyLibrary</title>
+</head>
+<body>
+    <nav class="main_nav">
+        <h1>MyLibrary</h1>
+        <button class="btn" id="new_btn" onclick="toggle()">New</button>
+    </nav>
+
+    
+    <form class="main_form" name="book_form" onsubmit="return createBookEvent();">
+       
+        <fieldset class="book_entry" name="book_entry">
+            <label for="author">Author</label>
+            <input type="text" name="author" class="entry" id="author" required>
+            <label for="name">Name</label>
+            <input type="text" name="name" class="entry" id="name" required>
+            <label for="pages">Pages</label>
+            <input type="text" name="pages" class="entry" id="pages" required>
+        </fieldset>
+
+        <fieldset class="submit_form">
+            <h2 id="read">Have you read the book?</h2>
+            <label for="yes_radio">Yes</label>
+            <input type="radio" name="yn" value="1" id="yes_radio" checked >
+            <label for="no_radio">No</label>
+            <input type="radio" name="yn" value="0" id="no_radio">
+            <input type="submit" value="Add" id="submit" class="btn">
+        </fieldset>
+    
+
+    </form>
+
+    <div class="library">
+        <div class="book">
+            <div class="book_right">
+                <p>Harry Potter</p>
+                <p>J.K Rowling</p>
+                <p>300 pg.</p>
+            </div>
+            <div class="book_left">
+                <div class="book_btns">
+                    <button class="btn_b btn" name="readStat">-</button>
+                    <button class="btn_b btn" name="delete">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
