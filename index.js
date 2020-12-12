@@ -1,16 +1,28 @@
 
-
 let myLibrary = [];
 let id_counter = getCounter();
 const library_dom = document.querySelector(".library");
+const nav = document.querySelector(".main_nav");
+
 displayBooks();
 
 /*Event listener*/
 library_dom.addEventListener('click', (event) => {
+   
     if(event.target.name === "delete") {
         removeBookEvent(+event.target.closest(".book").getAttribute("name"));
     } else if (event.target.name === "readStat") {
-        console.log("ReadStat")
+        changeRead(event.target);
+    }
+});
+
+nav.addEventListener('click',(event) => {
+    
+    if(event.target.name === "new"){
+        console.log(event.target.name);
+        toggle();
+    } else if(event.target.name === "clear"){
+        clear();
     }
 });
 
@@ -81,17 +93,6 @@ function getCounter() {
     return +counter;
 }
 
-function toggle() {
-    let form = document.forms.book_form;
-   
-    if(form.style.display === "none"){
-        form.style.display = "flex";
-        document.querySelector("#new_btn").innerHTML= "Cancel";
-    } else {
-        form.style.display = "none";
-        document.querySelector("#new_btn").innerHTML = "New";
-    }
-}
 
 function displayBooks() {
    
@@ -126,5 +127,33 @@ function createHTML(author,name,pages,hasRead,id) {
     return html;
 }
 
+
+
+function toggle() {
+    let form = document.forms.book_form;
+    console.log(form.style.display)
+    if(form.style.display === "none"){
+        form.style.display = "flex";
+        document.querySelector("#new_btn").innerHTML = "Cancel";
+    } else {
+        form.style.display = "none";
+        document.querySelector("#new_btn").innerHTML = "New";
+    }
+}
+
+function changeRead(btn) {
+    id = btn.closest(".book").getAttribute("name");
+    let book = myLibrary.find(item => item.id==id);
+    current = book.hasRead;
+    book.hasRead = !current;
+    localStorage.setItem("lib",JSON.stringify(myLibrary));
+    btn.innerHTML = String(!current);
+    console.log(book);
+}
+
+function clear() {
+    localStorage.clear();
+    location.reload();
+}
 
 
