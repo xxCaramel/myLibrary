@@ -80,7 +80,7 @@ function createBookEvent() {
     }
     info.push(readStatus);
    
-    let book = new Book(info[0],info[1],info[2],info[3],id_counter++);
+    let book = new Book(...info,id_counter++);
     localStorage.setItem("counter",id_counter);
 
     addBookToLibrary(book);
